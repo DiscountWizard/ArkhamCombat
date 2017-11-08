@@ -17,6 +17,7 @@
   </fonts>
   <objects name="objects">
     <object>objects\object0</object>
+    <object>objects\object27</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
