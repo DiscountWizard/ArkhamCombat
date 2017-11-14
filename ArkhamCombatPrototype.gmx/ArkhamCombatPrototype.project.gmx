@@ -10,6 +10,10 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+  </fonts>
+  <objects name="objects"/>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
