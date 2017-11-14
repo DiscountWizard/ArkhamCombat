@@ -8,10 +8,6 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
-  <fonts name="fonts"/>
-  <objects name="objects">
-    <object>objects\objectmastertest</object>
-  </objects>
   <help>
     <rtf>help.rtf</rtf>
   </help>
