@@ -26,20 +26,32 @@
           <argument>
             <kind>1</kind>
             <string>if (keyboard_check(ord('W'))) {
-    y -= 10
+    yMov = -1
+} else if (keyboard_check(ord('S'))) {
+    yMov = 1
+} else {
+    yMov = 0
 }
 
 if (keyboard_check(ord('A'))) {
-    x -= 10
+    xMov = -1
+} else if (keyboard_check(ord('D'))) {
+    xMov = 1
+} else {
+    xMov = 0
 }
 
-if (keyboard_check(ord('S'))) {
-    y += 10
+direction = point_direction(0,0,xMov,yMov)
+
+if (xMov != 0 || yMov != 0) {
+    speed = 8
+} else {
+    speed = 0
 }
 
-if (keyboard_check(ord('D'))) {
-    x += 10
-}
+
+
+
 </string>
           </argument>
         </arguments>
