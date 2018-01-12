@@ -43,14 +43,10 @@ surface_resize(application_surface, ScreenWidth, ScreenHeight)
 
 draw_set_color(c_white)
 draw_set_alpha(1)
-draw_set_halign(fa_center)
+draw_set_halign(fa_left)
 draw_set_font(fDebug)
 
-DebugLog[0] = "First Entry"
-DebugLog[1] = "Second Entry"
-DebugLog[2] = "Third Entry"
-DebugLog[3] = "Fourth Entry"
-DebugLog[4] = "Fifth Entry"
+DebugLog[100] = ""
 </string>
           </argument>
         </arguments>
@@ -73,10 +69,10 @@ DebugLog[4] = "Fifth Entry"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(200, 200, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
+            <string>draw_text(50, 10, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
 
 for (i = 0; i &lt; array_length_1d(DebugLog); i++) {
-    draw_text(200, 300 + (i * string_height("X")), DebugLog[i])
+    draw_text(50, 50 + (i * string_height("X")), DebugLog[i])
 }
 </string>
           </argument>

@@ -30,6 +30,9 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\AddDebugLogEntry.gml</script>
+  </scripts>
   <fonts name="fonts">
     <font>fonts\fDebug</font>
   </fonts>
