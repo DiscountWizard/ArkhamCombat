@@ -50,8 +50,8 @@
             <kind>1</kind>
             <string>// Movement
 direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
-speed = point_distance(0,0,global.horizontalMov,global.verticalMov) * movementSpdModifier * delta_time / 1000000
-
+normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
+speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 </string>
           </argument>
         </arguments>

@@ -1,5 +1,5 @@
 for (i = 100; i >= 1; i--) {
-    UI.DebugLog[i] = UI.DebugLog[i - 1]
+    Debug.DebugLog[i] = Debug.DebugLog[i - 1]
 }
 
-UI.DebugLog[0] = argument[0]
+Debug.DebugLog[0] = argument[0]

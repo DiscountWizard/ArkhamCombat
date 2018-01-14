@@ -39,7 +39,7 @@
   <objects name="objects">
     <object>objects\Player</object>
     <object>objects\InputHandler</object>
-    <object>objects\UI</object>
+    <object>objects\Debug</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

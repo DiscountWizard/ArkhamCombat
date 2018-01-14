@@ -47,6 +47,8 @@ draw_set_halign(fa_left)
 draw_set_font(fDebug)
 
 DebugLog[100] = ""
+global.toggleDebugLog = false
+global.toggleDebugLogBackplate = false
 </string>
           </argument>
         </arguments>
@@ -70,9 +72,18 @@ DebugLog[100] = ""
           <argument>
             <kind>1</kind>
             <string>draw_text(50, 10, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
+draw_text(50, 30, "Player Spd: " + string(Player.speed))
 
-for (i = 0; i &lt; array_length_1d(DebugLog); i++) {
-    draw_text(50, 50 + (i * string_height("X")), DebugLog[i])
+if (global.toggleDebugLog) {
+    if (global.toggleDebugLogBackplate) {
+        draw_set_alpha(0.5)
+        draw_rectangle_colour(45, 45, 500, string_height("X") * 100, c_gray, c_gray, c_gray, c_gray, false)
+    }
+    
+    for (i = 0; i &lt; array_length_1d(DebugLog); i++) {
+        draw_set_alpha(1)
+        draw_text(50, 50 + (i * string_height("X")), DebugLog[i])
+    }
 }
 </string>
           </argument>
