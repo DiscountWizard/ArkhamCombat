@@ -27,6 +27,7 @@
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
     <sprite>sprites\sprite1</sprite>
+    <sprite>sprites\sEnemy</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -40,6 +41,7 @@
     <object>objects\Player</object>
     <object>objects\InputHandler</object>
     <object>objects\Debug</object>
+    <object>objects\oEnemy</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
