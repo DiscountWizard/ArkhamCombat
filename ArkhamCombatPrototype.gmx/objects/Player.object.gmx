@@ -49,9 +49,52 @@
           <argument>
             <kind>1</kind>
             <string>// Movement
-direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
+if (global.horizontalMov != 0 || global.verticalMov != 0) {
+    direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
+}
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>visionDistance = 100
+
+leftVisionAngle = direction + 22.5
+rightVisionAngle = direction - 22.5
+
+leftVisionEndPoint_X = lengthdir_x(visionDistance, leftVisionAngle)
+leftVisionEndPoint_Y = lengthdir_y(visionDistance, leftVisionAngle)
+rightVisionEndPoint_X = lengthdir_x(visionDistance, rightVisionAngle)
+rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
+
+draw_set_color(c_white)
+draw_set_alpha(0.2)
+draw_triangle(x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y, false)
+
+draw_set_alpha(1)
+draw_line(x, y, x + lengthdir_x(100, direction), y + lengthdir_y(100, direction))
 </string>
           </argument>
         </arguments>

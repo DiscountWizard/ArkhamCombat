@@ -71,9 +71,12 @@ draw_set_alpha(1)
 draw_set_halign(fa_left)
 draw_set_font(fDebug)
 
+// Static Debug Data
 draw_text(50, 10, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
 draw_text(50, 30, "Player Spd: " + string(Player.speed))
+draw_text(50, 50, "Player Dir: " + string(Player.direction))
 
+// Debug Log
 if (global.toggleDebugLog) {
     if (global.toggleDebugLogBackplate) {
         draw_set_alpha(0.5)
@@ -82,9 +85,11 @@ if (global.toggleDebugLog) {
     
     for (i = 0; i &lt; array_length_1d(DebugLog); i++) {
         draw_set_alpha(1)
-        draw_text(50, 50 + (i * string_height("X")), DebugLog[i])
+        draw_text(50, 100 + (i * string_height("X")), DebugLog[i])
     }
 }
+
+
 </string>
           </argument>
         </arguments>
