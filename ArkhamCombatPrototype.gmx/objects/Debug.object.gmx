@@ -25,26 +25,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ScreenWidth = display_get_width() - 100
-ScreenHeight = display_get_height() - 100
-
-window_set_size(ScreenWidth, ScreenHeight)
-
-view_wview = ScreenWidth
-view_hview = ScreenHeight
-
-view_wport = ScreenWidth
-view_hport = ScreenHeight
-
-room_width = ScreenWidth
-room_height = ScreenHeight
-
-surface_resize(application_surface, ScreenWidth, ScreenHeight)
-
-DebugLog[100] = ""
+            <string>DebugLog[100] = ""
 global.toggleDebugLog = false
 global.toggleDebugLogBackplate = false
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

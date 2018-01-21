@@ -52,6 +52,9 @@
 if (global.horizontalMov != 0 || global.verticalMov != 0) {
     direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
 }
+
+direction = point_direction(x, y, mouse_x, mouse_y)
+
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
@@ -97,6 +100,21 @@ draw_triangle(x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + righ
 
 draw_set_alpha(1)
 draw_line(x, y, x + lengthdir_x(100, direction), y + lengthdir_y(100, direction))
+
+enemiesInVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y)
+
+AddDebugLogEntry(string(array_length_1d(enemiesInVision)))
+
+for (var i = 0; i &lt; array_length_1d(enemiesInVision); i++) {
+    if (enemiesInVision[i] &gt; 0) {
+        draw_line(x, y, (enemiesInVision[i]).x, (enemiesInVision[i]).y)
+    }
+    //AddDebugLogEntry(string(array_length_1d(enemiesInVision)))
+    //AddDebugLogEntry(string(enemiesInVision[i]))
+    //draw_line(x, y, (enemiesInVision[i]).x, (enemiesInVision[i]).y)
+}
+
+
 </string>
           </argument>
         </arguments>

@@ -107,8 +107,8 @@ nearest = instance_nearest(tempX, tempY, oEnemy)
 x = tempX
 y = tempY
 
-draw_line(x, y, nearest.x, nearest.y)
-draw_text(x, y + 20, string(nearest))
+//draw_line(x, y, nearest.x, nearest.y)
+draw_text(x, y + 20, string(id))
 </string>
           </argument>
         </arguments>

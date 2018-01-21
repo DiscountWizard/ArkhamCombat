@@ -70,6 +70,10 @@ if (keyboard_check_released(ord('0'))) {
 if (keyboard_check_released(ord('9'))) {
     global.toggleDebugLogBackplate = !global.toggleDebugLogBackplate
 }
+
+if (keyboard_check_released(vk_escape)) {
+    game_end()
+}
 </string>
           </argument>
         </arguments>
