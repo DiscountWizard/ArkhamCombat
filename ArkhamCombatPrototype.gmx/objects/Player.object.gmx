@@ -55,6 +55,16 @@ if (global.horizontalMov != 0 || global.verticalMov != 0) {
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
+visionDistance = 300
+
+leftVisionAngle = direction + 22.5
+rightVisionAngle = direction - 22.5
+
+leftVisionEndPoint_X = lengthdir_x(visionDistance, leftVisionAngle)
+leftVisionEndPoint_Y = lengthdir_y(visionDistance, leftVisionAngle)
+rightVisionEndPoint_X = lengthdir_x(visionDistance, rightVisionAngle)
+rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
+
 
 
 </string>
@@ -79,15 +89,7 @@ speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>visionDistance = 100
-
-leftVisionAngle = direction + 22.5
-rightVisionAngle = direction - 22.5
-
-leftVisionEndPoint_X = lengthdir_x(visionDistance, leftVisionAngle)
-leftVisionEndPoint_Y = lengthdir_y(visionDistance, leftVisionAngle)
-rightVisionEndPoint_X = lengthdir_x(visionDistance, rightVisionAngle)
-rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
+            <string>
 
 draw_set_color(c_white)
 draw_set_alpha(0.2)
