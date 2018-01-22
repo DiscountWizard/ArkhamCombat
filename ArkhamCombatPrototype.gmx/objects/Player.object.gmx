@@ -60,13 +60,65 @@ speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
 visionDistance = 300
 
-leftVisionAngle = direction + 22.5
-rightVisionAngle = direction - 22.5
+leftVisionAngle = direction + 22
+rightVisionAngle = direction - 22
 
 leftVisionEndPoint_X = lengthdir_x(visionDistance, leftVisionAngle)
 leftVisionEndPoint_Y = lengthdir_y(visionDistance, leftVisionAngle)
 rightVisionEndPoint_X = lengthdir_x(visionDistance, rightVisionAngle)
 rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
+
+enemiesInVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y)
+
+if (array_length_1d(enemiesInVision) == 1) {
+    closestEnemy = enemiesInVision[0]
+} else {
+    closestEnemy = enemiesInVision[0]
+    
+    for (var i = 1; i &lt; array_length_1d(enemiesInVision); i++) {
+        if (distance_to_object(enemiesInVision[i]) &lt; distance_to_object(closestEnemy)) {
+            closestEnemy = enemiesInVision[i]
+        }
+    }
+}
+
+
+
+
+/*
+rightSideFound = false
+leftSideFound = false
+closestEnemy = 0
+for (var i = 1; i &lt;= 22; i++) {
+    if (rightSideFound == false) {
+        closestEnemyRight = collision_line(x, y, x + lengthdir_x(visionDistance, direction - i), y + lengthdir_y(visionDistance, direction - i), oEnemy, false, true) 
+    }
+    if (closestEnemyRight &gt; 0) {
+        rightSideFound = true
+    }
+    
+    if (leftSideFound == false) {
+        closestEnemyLeft = collision_line(x, y, x + lengthdir_x(visionDistance, direction + i), y + lengthdir_y(visionDistance, direction + i), oEnemy, false, true)    
+    }
+    if (closestEnemyLeft &gt; 0) {
+        leftSideFound = true
+    }
+}
+
+if (closestEnemyRight &gt; 0 &amp;&amp; closestEnemyLeft &lt; 0) {
+    closestEnemy = closestEnemyRight
+} else if (closestEnemyRight &lt; 0 &amp;&amp; closestEnemyLeft &gt; 0) {
+    closestEnemy = closestEnemyLeft
+} else if (closestEnemyRight == closestEnemyLeft) {
+    closestEnemy = closestEnemyLeft
+} else if (closestEnemyRight &gt; 0 &amp;&amp; closestEnemyLeft &gt; 0) {
+    if (distance_to_object(closestEnemyRight) &lt; distance_to_object(closestEnemyLeft)) {
+        closestEnemy = closestEnemyRight
+    } else {
+        closestEnemy = closestEnemyLeft
+    }
+}
+*/
 
 
 
@@ -92,29 +144,19 @@ rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
+            <string>// Draw Player vision cone triangle
 draw_set_color(c_white)
 draw_set_alpha(0.2)
 draw_triangle(x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y, false)
 
+// Draw Player direction line
 draw_set_alpha(1)
 draw_line(x, y, x + lengthdir_x(100, direction), y + lengthdir_y(100, direction))
 
-enemiesInVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y)
-
-AddDebugLogEntry(string(array_length_1d(enemiesInVision)))
-
-for (var i = 0; i &lt; array_length_1d(enemiesInVision); i++) {
-    if (enemiesInVision[i] &gt; 0) {
-        draw_line(x, y, (enemiesInVision[i]).x, (enemiesInVision[i]).y)
-    }
-    //AddDebugLogEntry(string(array_length_1d(enemiesInVision)))
-    //AddDebugLogEntry(string(enemiesInVision[i]))
-    //draw_line(x, y, (enemiesInVision[i]).x, (enemiesInVision[i]).y)
+// Draw line to targetted enemy
+if (closestEnemy &gt; 0) {
+    draw_line(x, y, closestEnemy.x, closestEnemy.y)
 }
-
-
 </string>
           </argument>
         </arguments>
