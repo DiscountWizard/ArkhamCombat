@@ -70,6 +70,8 @@ rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
 
 enemiesInVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y)
 
+
+
 if (array_length_1d(enemiesInVision) == 1) {
     closestEnemy = enemiesInVision[0]
 } else {
