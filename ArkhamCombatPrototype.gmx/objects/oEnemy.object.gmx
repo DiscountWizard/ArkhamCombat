@@ -102,13 +102,11 @@ tempY = y
 x = -1000000
 y = -1000000
 
-nearest = instance_nearest(tempX, tempY, oEnemy)
-
 x = tempX
 y = tempY
 
 //draw_line(x, y, nearest.x, nearest.y)
-draw_text(x, y + 20, string(id))
+draw_text(x, y + 20, string(distance_to_object(Player)));
 </string>
           </argument>
         </arguments>

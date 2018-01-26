@@ -58,34 +58,58 @@ direction = point_direction(x, y, mouse_x, mouse_y)
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
-visionDistance = 300
+// Re-learn trigonometry and fix this
+visionDistance = 300;
+narrowVisionDistance = 280
+wideAngleFromCenter = 22;
+narrowAngleFromCenter = 7
 
-leftVisionAngle = direction + 22
-rightVisionAngle = direction - 22
 
-leftVisionEndPoint_X = lengthdir_x(visionDistance, leftVisionAngle)
-leftVisionEndPoint_Y = lengthdir_y(visionDistance, leftVisionAngle)
-rightVisionEndPoint_X = lengthdir_x(visionDistance, rightVisionAngle)
-rightVisionEndPoint_Y = lengthdir_y(visionDistance, rightVisionAngle)
+wideVisionAngle_Left = direction + wideAngleFromCenter;
+wideVisionAngle_Right = direction - wideAngleFromCenter;
+narrowVisionAngle_Left = direction + narrowAngleFromCenter;
+narrowVisionAngle_Right = direction - narrowAngleFromCenter;
+
+leftVisionEndPoint_X = lengthdir_x(visionDistance, wideVisionAngle_Left)
+leftVisionEndPoint_Y = lengthdir_y(visionDistance, wideVisionAngle_Left)
+rightVisionEndPoint_X = lengthdir_x(visionDistance, wideVisionAngle_Right)
+rightVisionEndPoint_Y = lengthdir_y(visionDistance, wideVisionAngle_Right)
+
+leftNarrowVisionEndPoint_X = lengthdir_x(narrowVisionDistance, narrowVisionAngle_Left)
+leftNarrowVisionEndPoint_Y = lengthdir_y(narrowVisionDistance, narrowVisionAngle_Left)
+rightNarrowVisionEndPoint_X = lengthdir_x(narrowVisionDistance, narrowVisionAngle_Right)
+rightNarrowVisionEndPoint_Y = lengthdir_y(narrowVisionDistance, narrowVisionAngle_Right)
 
 enemiesInVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y)
+enemiesInNarrowVision = getAryOfInstancesInTriangle(oEnemy, x, y, x + leftNarrowVisionEndPoint_X, y + leftNarrowVisionEndPoint_Y, x + rightNarrowVisionEndPoint_X, y + rightNarrowVisionEndPoint_Y)
 
-
-
-if (array_length_1d(enemiesInVision) == 1) {
-    closestEnemy = enemiesInVision[0]
-} else {
-    closestEnemy = enemiesInVision[0]
-    
-    for (var i = 1; i &lt; array_length_1d(enemiesInVision); i++) {
-        if (distance_to_object(enemiesInVision[i]) &lt; distance_to_object(closestEnemy)) {
-            closestEnemy = enemiesInVision[i]
+// Sort Enemies array by shortest distance to player
+if (enemiesInVision[0] &gt; 0) {
+    for (var i = 0; i &lt; array_length_1d(enemiesInVision); i++) {
+        for (var o = i + 1; o &lt; array_length_1d(enemiesInVision); o++) {
+            if (distance_to_object(enemiesInVision[o]) &lt; distance_to_object(enemiesInVision[i])) {
+                tempVar = enemiesInVision[i];
+                enemiesInVision[i] = enemiesInVision[o];
+                enemiesInVision[o] = tempVar;
+            }
         }
     }
 }
 
+if (enemiesInNarrowVision[0] &gt; 0) {
+    for (var i = 0; i &lt; array_length_1d(enemiesInNarrowVision); i++) {
+        for (var o = i + 1; o &lt; array_length_1d(enemiesInNarrowVision); o++) {
+            if (distance_to_object(enemiesInNarrowVision[o]) &lt; distance_to_object(enemiesInNarrowVision[i])) {
+                tempVar = enemiesInNarrowVision[i];
+                enemiesInNarrowVision[i] = enemiesInNarrowVision[o];
+                enemiesInNarrowVision[o] = tempVar;
+            }
+        }
+    }
+}
 
-
+closestEnemy = enemiesInVision[0]
+closestNarrowVisEnemy = enemiesInNarrowVision[0]
 
 /*
 rightSideFound = false
@@ -148,16 +172,23 @@ if (closestEnemyRight &gt; 0 &amp;&amp; closestEnemyLeft &lt; 0) {
             <kind>1</kind>
             <string>// Draw Player vision cone triangle
 draw_set_color(c_white)
+
 draw_set_alpha(0.2)
 draw_triangle(x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + rightVisionEndPoint_X, y + rightVisionEndPoint_Y, false)
+draw_triangle(x, y, x + leftNarrowVisionEndPoint_X, y + leftNarrowVisionEndPoint_Y, x + rightNarrowVisionEndPoint_X, y + rightNarrowVisionEndPoint_Y, false)
 
 // Draw Player direction line
 draw_set_alpha(1)
-draw_line(x, y, x + lengthdir_x(100, direction), y + lengthdir_y(100, direction))
+//draw_line(x, y, x + lengthdir_x(100, direction), y + lengthdir_y(100, direction))
 
 // Draw line to targetted enemy
 if (closestEnemy &gt; 0) {
-    draw_line(x, y, closestEnemy.x, closestEnemy.y)
+    draw_line_width(x, y, closestEnemy.x, closestEnemy.y, 5);
+}
+
+if (closestNarrowVisEnemy &gt; 0) {
+    draw_set_color(c_red);
+    draw_line_width(x, y, closestNarrowVisEnemy.x, closestNarrowVisEnemy.y, 5);
 }
 </string>
           </argument>

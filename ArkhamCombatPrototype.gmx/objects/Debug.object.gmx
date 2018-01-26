@@ -82,6 +82,14 @@ draw_text(50, 10, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
 draw_text(50, 30, "Player Spd: " + string(Player.speed))
 draw_text(50, 50, "Player Dir: " + string(Player.direction))
 
+draw_text(50, 70, "Closest: " + string(Player.enemiesInVision[0]))
+if (array_length_1d(Player.enemiesInVision) &gt; 1) {
+    draw_text(50, 90, "Closest: " + string(Player.enemiesInVision[1]))
+}
+if (array_length_1d(Player.enemiesInVision) &gt; 2) {
+    draw_text(50, 110, "Closest: " + string(Player.enemiesInVision[2]))
+}
+
 // Debug Log
 if (global.toggleDebugLog) {
     if (global.toggleDebugLogBackplate) {
