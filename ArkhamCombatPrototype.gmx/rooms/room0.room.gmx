@@ -70,11 +70,10 @@ surface_resize(application_surface, ScreenWidth, ScreenHeight)</code>
     <instance objName="Player" x="896" y="544" name="inst_5597FB85" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="InputHandler" x="0" y="0" name="inst_C5352DAB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Debug" x="32" y="0" name="inst_A86D280B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="896" y="704" name="inst_8B948F55" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="992" y="768" name="inst_2D6B1A28" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="1120" y="384" name="inst_172DC5EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="736" y="416" name="inst_474C90E3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEnemy" x="768" y="704" name="inst_E875CE08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEnemy" x="928" y="416" name="inst_172DC5EC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEnemy" x="768" y="416" name="inst_162BF3DB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEnemy" x="704" y="544" name="inst_E4FA5968" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEnemy" x="1440" y="544" name="inst_D7C0BD79" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
