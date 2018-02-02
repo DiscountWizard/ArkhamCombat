@@ -83,16 +83,17 @@ global.horizontalMov = gamepad_axis_value(pad, gp_axislh);
 global.verticalMov = gamepad_axis_value(pad, gp_axislv);
 
 // A
- global.Action1 = gamepad_button_check(pad, gp_face1);
+global.Action1 = gamepad_button_check(pad, gp_face1);
  
 // B
- global.Action2 = gamepad_button_check(pad, gp_face2);
+global.Action2 = gamepad_button_check(pad, gp_face2);
  
 // X
- global.Action3 = gamepad_button_check(pad, gp_face3);
+global.Action3_Held = gamepad_button_check(pad, gp_face3);
+global.Action3_Tap = gamepad_button_check_pressed(pad, gp_face3);
  
 // Y
- global.Action4 = gamepad_button_check(pad, gp_face4);
+global.Action4 = gamepad_button_check(pad, gp_face4);
 
 
 
@@ -143,7 +144,7 @@ if (keyboard_check_released(vk_escape)) {
             <string>switch(async_load[? "event_type"]) {
 case "gamepad discovered":
     pad = async_load[? "pad_index"];
-    gamepad_set_axis_deadzone(pad, 0.1);
+    gamepad_set_axis_deadzone(pad, 0.2);
     gamepad_set_button_threshold(pad, 0.1);
     break;
 }
@@ -191,7 +192,7 @@ if (global.Action2) {
 var xOffset_green = sprite_width * 0.315;
 var yOffset_green = sprite_height * 0.295;
 
-if (global.Action3) {
+if (global.Action3_Held) {
     draw_circle_colour(x - xOffset_green, y + yOffset_green, scaleConst * image_xscale, c_blue, c_blue, false);
 }
 

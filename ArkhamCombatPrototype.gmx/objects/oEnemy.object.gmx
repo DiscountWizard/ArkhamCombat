@@ -51,7 +51,7 @@ accelAmt = 1
             <kind>1</kind>
             <string>image_angle = point_direction(x, y, Player.x, Player.y)
 
-if (point_distance(x, y, Player.x, Player.y) &gt; 200) {
+if (point_distance(x, y, Player.x, Player.y) &gt; 300) {
     direction = image_angle
     moving = true
 } else if (point_distance(x, y, Player.x, Player.y) &lt; 50) {

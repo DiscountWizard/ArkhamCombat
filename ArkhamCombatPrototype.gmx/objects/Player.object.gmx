@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>movementSpdModifier = 300
+            <string>movementSpdModifier = 300;
+
+movingToTarget = false;
 </string>
           </argument>
         </arguments>
@@ -48,7 +50,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Movement
+            <string>/***************
+*** MOVEMENT ***
+****************/
 if (global.horizontalMov != 0 || global.verticalMov != 0) {
     direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
 }
@@ -58,8 +62,12 @@ if (global.horizontalMov != 0 || global.verticalMov != 0) {
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
+/*****************
+*** TARGETTING ***
+******************/
+
 // Distance along the angle of the vision triangle, not distance to middle.
-visionDistance = 300;
+visionDistance = 500;
 wideAngleFromCenter = 22;
 
 wideVisionAngle_Left = direction + wideAngleFromCenter;
@@ -86,8 +94,6 @@ if (enemiesInVision[0] &gt; 0) {
     }
 }
 
-//enemyProximityRanking[0] = enemyProximityRanking[1];
-
 // Sort enemyProximityRanking array by smallest number
 if (enemyProximityRanking[0, 0] &gt; 0) {
     for (var i = 0; i &lt; array_height_2d(enemyProximityRanking); i++) {
@@ -106,6 +112,25 @@ if (enemyProximityRanking[0, 0] &gt; 0) {
 }
 
 closestEnemy = enemyProximityRanking[0, 0]
+
+/*************
+*** ATTACK ***
+**************/
+
+if (global.Action3_Tap &amp;&amp; closestEnemy &gt; 0) {
+    movingToTarget = true;
+    lockedEnemy = closestEnemy;
+}
+
+if (movingToTarget) {
+    direction = point_direction(x, y, lockedEnemy.x, lockedEnemy.y);
+    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
+    
+    if (place_meeting(x, y, lockedEnemy)) {
+        movingToTarget = false;
+    }
+}
+
 </string>
           </argument>
         </arguments>
