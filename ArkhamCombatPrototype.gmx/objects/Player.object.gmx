@@ -53,7 +53,7 @@ if (global.horizontalMov != 0 || global.verticalMov != 0) {
     direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
 }
 
-direction = point_direction(x, y, mouse_x, mouse_y)
+//direction = point_direction(x, y, mouse_x, mouse_y)
 
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
