@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>movementSpdModifier = 250
 accelAmt = 1
+
+health = 1000
 </string>
           </argument>
         </arguments>
