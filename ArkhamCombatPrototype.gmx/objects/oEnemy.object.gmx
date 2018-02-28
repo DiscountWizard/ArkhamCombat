@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>oCharacter</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,10 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>movementSpdModifier = 250
+            <string>event_inherited();
+movementSpdModifier = 250
 accelAmt = 1
 
-health = 1000
+HP = 1000
 </string>
           </argument>
         </arguments>
@@ -65,11 +66,18 @@ if (point_distance(x, y, Player.x, Player.y) &gt; 300) {
 
 maxSpeed = movementSpdModifier * delta_time / 1000000
 
-if (moving) {
-    speed = clamp(speed + accelAmt, 0, maxSpeed)
+if (StnDur &lt;= 0) {
+    if (moving) {
+        speed = clamp(speed + accelAmt, 0, maxSpeed)
+    } else {
+        speed = clamp(speed - accelAmt, 0, maxSpeed)
+    }
 } else {
-    speed = clamp(speed - accelAmt, 0, maxSpeed)
+    speed = 0;
+    StnDur -= (delta_time/1000000) 
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -107,6 +115,7 @@ y = tempY
 
 //draw_line(x, y, nearest.x, nearest.y)
 draw_text(x, y + 20, string(distance_to_object(Player)));
+draw_text(x, y - 20, string(StnDur));
 </string>
           </argument>
         </arguments>

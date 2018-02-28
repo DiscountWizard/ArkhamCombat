@@ -35,6 +35,8 @@
   <scripts name="scripts">
     <script>scripts\AddDebugLogEntry.gml</script>
     <script>scripts\getAryOfInstancesInTriangle.gml</script>
+    <script>scripts\DmgChar.gml</script>
+    <script>scripts\StnChar.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fDebug</font>
@@ -44,6 +46,7 @@
     <object>objects\InputHandler</object>
     <object>objects\Debug</object>
     <object>objects\oEnemy</object>
+    <object>objects\oCharacter</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

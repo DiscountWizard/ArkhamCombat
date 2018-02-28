@@ -1,4 +1,4 @@
-///get_ids_region(obj, x1, y1, x2, y2, x3, y3)
+///getAryOfInstancesInTriangle(obj, x1, y1, x2, y2, x3, y3)
 var arr, n;
 n = 0;
 arr[0] = noone;
