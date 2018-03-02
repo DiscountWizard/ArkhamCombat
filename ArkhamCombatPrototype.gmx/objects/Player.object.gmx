@@ -25,9 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>movementSpdModifier = 300;
+            <string>event_inherited();
+
+movementSpdModifier = 300;
 
 movingToTarget = false;
+
+deadzone = 0.3;
 </string>
           </argument>
         </arguments>
@@ -53,13 +57,23 @@ movingToTarget = false;
             <string>/***************
 *** MOVEMENT ***
 ****************/
-if (global.horizontalMov != 0 || global.verticalMov != 0) {
-    direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
-}
+//if (global.horizontalMov != 0 || global.verticalMov != 0) {
+  //  direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
+//}
 
 //direction = point_direction(x, y, mouse_x, mouse_y)
 
-normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0, 1.00)
+normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0.0, 1.00)
+
+//deadzone
+if (normalizedSpdVector &lt; deadzone) {
+    normalizedSpdVector = 0.0;
+} else {
+    direction = point_direction(0,0,global.horizontalMov,global.verticalMov);
+}
+normalizedSpdVector = ((normalizedSpdVector - deadzone) / (1 - deadzone))
+normalizedSpdVector = clamp(normalizedSpdVector, 0, 1.00);
+
 speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
 
 /*****************
@@ -165,7 +179,7 @@ draw_triangle(x, y, x + leftVisionEndPoint_X, y + leftVisionEndPoint_Y, x + righ
 draw_set_alpha(1)
 
 // Draw line to targetted enemy
-if (closestEnemy &gt; 0) {
+if (instance_exists(closestEnemy)) {
     draw_line_width(x, y, closestEnemy.x, closestEnemy.y, 5);
 }
 </string>

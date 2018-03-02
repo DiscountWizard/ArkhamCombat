@@ -66,6 +66,8 @@ if (point_distance(x, y, Player.x, Player.y) &gt; 300) {
 
 maxSpeed = movementSpdModifier * delta_time / 1000000
 
+image_blend = -1;
+
 if (StnDur &lt;= 0) {
     if (moving) {
         speed = clamp(speed + accelAmt, 0, maxSpeed)
@@ -74,10 +76,14 @@ if (StnDur &lt;= 0) {
     }
 } else {
     speed = 0;
-    StnDur -= (delta_time/1000000) 
+    StnDur -= (delta_time/1000000);
+    
+    image_blend = c_yellow;
 }
 
-
+if (HP &lt;= 0) {
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
