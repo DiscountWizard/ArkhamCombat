@@ -101,11 +101,11 @@ global.Action4 = gamepad_button_check(pad, gp_face4);
     DEBUGGING
 */
 if (keyboard_check_released(ord('1'))) {
-    AddDebugLogEntry("Pressed 1")
+    addDebugLogEntry("Pressed 1")
 }
 
 if (keyboard_check_released(ord('2'))) {
-    AddDebugLogEntry("Pressed 2")
+    addDebugLogEntry("Pressed 2")
 }
 
 if (keyboard_check_released(ord('0'))) {

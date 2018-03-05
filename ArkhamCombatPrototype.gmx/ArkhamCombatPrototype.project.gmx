@@ -25,31 +25,30 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprite0</sprite>
-    <sprite>sprites\sprite1</sprite>
+    <sprite>sprites\sPlayerTemp</sprite>
     <sprite>sprites\sEnemy</sprite>
     <sprite>sprites\sController</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\AddDebugLogEntry.gml</script>
+    <script>scripts\addDebugLogEntry.gml</script>
     <script>scripts\getAryOfInstancesInTriangle.gml</script>
-    <script>scripts\DmgChar.gml</script>
-    <script>scripts\StnChar.gml</script>
+    <script>scripts\dmgChar.gml</script>
+    <script>scripts\stnChar.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fDebug</font>
   </fonts>
   <objects name="objects">
-    <object>objects\Player</object>
-    <object>objects\InputHandler</object>
-    <object>objects\Debug</object>
+    <object>objects\oPlayer</object>
+    <object>objects\oInputHandler</object>
+    <object>objects\oDebug</object>
     <object>objects\oEnemy</object>
     <object>objects\oCharacter</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <room>rooms\rBasicArea</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

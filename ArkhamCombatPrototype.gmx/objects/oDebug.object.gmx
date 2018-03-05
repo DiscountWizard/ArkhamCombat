@@ -78,11 +78,11 @@ draw_set_halign(fa_left)
 draw_set_font(fDebug)
 
 // Static Debug Data
-draw_text(50, 10, "Player Pos: " + string(Player.x) + ", " + string(Player.y))
-draw_text(50, 30, "Player Spd: " + string(Player.speed))
-draw_text(50, 50, "Player Dir: " + string(Player.direction))
-draw_text(50, 70, "id of closest: " + string(Player.enemyProximityRanking[0, 0]))
-draw_text(50, 90, "Proximity Score: " + string(Player.enemyProximityRanking[0, 1]))
+draw_text(50, 10, "oPlayer Pos: " + string(oPlayer.x) + ", " + string(oPlayer.y))
+draw_text(50, 30, "oPlayer Spd: " + string(oPlayer.speed))
+draw_text(50, 50, "oPlayer Dir: " + string(oPlayer.direction))
+draw_text(50, 70, "id of closest: " + string(oPlayer.enemyProximityRanking[0, 0]))
+draw_text(50, 90, "Proximity Score: " + string(oPlayer.enemyProximityRanking[0, 1]))
 
 
 // Debug Log

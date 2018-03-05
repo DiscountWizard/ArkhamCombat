@@ -1,4 +1,4 @@
-///DmgChar(Character Object, int DamageAmount)
+///dmgChar(Character Object, int DamageAmount)
 var charToDmg = argument[0];
 var dmgAmt = argument[1];
 

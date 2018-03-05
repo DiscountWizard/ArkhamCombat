@@ -52,12 +52,12 @@ HP = 1000
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = point_direction(x, y, Player.x, Player.y)
+            <string>image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
 
-if (point_distance(x, y, Player.x, Player.y) &gt; 300) {
+if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; 300) {
     direction = image_angle
     moving = true
-} else if (point_distance(x, y, Player.x, Player.y) &lt; 50) {
+} else if (point_distance(x, y, oPlayer.x, oPlayer.y) &lt; 50) {
     direction = image_angle - 180
     moving = true
 } else {
@@ -120,7 +120,7 @@ x = tempX
 y = tempY
 
 //draw_line(x, y, nearest.x, nearest.y)
-draw_text(x, y + 20, string(distance_to_object(Player)));
+draw_text(x, y + 20, string(distance_to_object(oPlayer)));
 draw_text(x, y - 20, string(StnDur));
 </string>
           </argument>
