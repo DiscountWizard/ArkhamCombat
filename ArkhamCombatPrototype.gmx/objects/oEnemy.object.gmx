@@ -52,7 +52,9 @@ HP = 1000
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
+            <string>event_inherited();
+
+image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
 
 if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; 300) {
     direction = image_angle
@@ -84,6 +86,13 @@ if (StnDur &lt;= 0) {
 if (HP &lt;= 0) {
     instance_destroy();
 }
+
+// Collision test
+if (place_meeting(x, y, oCharacter)) {
+    var charToBumpAwayFrom = instance_place(x, y, oCharacter);
+    direction = point_direction(x, y, charToBumpAwayFrom.x, charToBumpAwayFrom.y) + 180;
+    speed = bumpSpd;
+}
 </string>
           </argument>
         </arguments>
@@ -106,7 +115,9 @@ if (HP &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_white)
+            <string>event_inherited();
+
+draw_set_color(c_white)
 draw_set_alpha(1)
 draw_set_halign(fa_center)
 draw_set_font(fDebug)
