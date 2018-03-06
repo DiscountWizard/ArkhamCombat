@@ -27,11 +27,15 @@
             <kind>1</kind>
             <string>event_inherited();
 
+accelAmt = 1;
+decelAmt = 0.1;
 movementSpdModifier = 300;
 
 movingToTarget = false;
 
 deadzone = 0.3;
+turnSpd = 2;
+
 </string>
           </argument>
         </arguments>
@@ -57,24 +61,39 @@ deadzone = 0.3;
             <string>/***************
 *** MOVEMENT ***
 ****************/
-//if (global.horizontalMov != 0 || global.verticalMov != 0) {
-  //  direction = point_direction(0,0,global.horizontalMov,global.verticalMov)
-//}
-
-//direction = point_direction(x, y, mouse_x, mouse_y)
-
 normalizedSpdVector = clamp(point_distance(0,0,global.horizontalMov,global.verticalMov), 0.0, 1.00)
 
 //deadzone
 if (normalizedSpdVector &lt; deadzone) {
     normalizedSpdVector = 0.0;
 } else {
-    direction = point_direction(0,0,global.horizontalMov,global.verticalMov);
+    var stickDirection = point_direction(0,0,global.horizontalMov,global.verticalMov);
+    var stickPlayerDiff = angle_difference(direction, stickDirection);
+    
+    if (abs(stickPlayerDiff) &gt; turnSpd) {
+        if (stickPlayerDiff &lt; 0) {
+            direction += turnSpd;
+        } else if (stickPlayerDiff &gt; 0) {
+            direction -= turnSpd;
+        }
+    } else {
+        direction = stickDirection;
+    }
+
+    //direction = point_direction(0,0,global.horizontalMov,global.verticalMov);
 }
 normalizedSpdVector = ((normalizedSpdVector - deadzone) / (1 - deadzone))
 normalizedSpdVector = clamp(normalizedSpdVector, 0, 1.00);
+var maxInputSpd = normalizedSpdVector * movementSpdModifier * delta_time / 1000000;
 
-speed = normalizedSpdVector * movementSpdModifier * delta_time / 1000000
+if (maxInputSpd &gt; 0) {
+    speed += accelAmt * (delta_time / 1000000);
+    speed = clamp(speed, 0, maxInputSpd);
+    //speed = maxInputSpd;
+} else if (speed &gt; maxInputSpd) {
+    speed -= decelAmt * (delta_time / 1000000);
+    speed = clamp(speed, 0, maxInputSpd);
+}
 
 /*****************
 *** TARGETTING ***
