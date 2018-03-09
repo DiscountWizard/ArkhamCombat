@@ -30,6 +30,9 @@ movementSpdModifier = 250
 accelAmt = 1
 
 HP = 1000
+
+awareOfPlayer = false;
+attacking = false;
 </string>
           </argument>
         </arguments>

@@ -46,6 +46,7 @@
     <object>objects\oDebug</object>
     <object>objects\oEnemy</object>
     <object>objects\oCharacter</object>
+    <object>objects\oFightDirector</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rBasicArea</room>
