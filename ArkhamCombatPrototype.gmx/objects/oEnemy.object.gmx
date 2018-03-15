@@ -32,7 +32,10 @@ accelAmt = 1
 HP = 1000
 
 awareOfPlayer = false;
-attacking = false;
+attackQueued = false;
+attackCooldown = false;
+
+movingToTarget = false;
 </string>
           </argument>
         </arguments>
@@ -59,10 +62,10 @@ attacking = false;
 
 image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
 
-if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; 300) {
+if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; 200) {
     direction = image_angle
     moving = true
-} else if (point_distance(x, y, oPlayer.x, oPlayer.y) &lt; 50) {
+} else if (point_distance(x, y, oPlayer.x, oPlayer.y) &lt; 150) {
     direction = image_angle - 180
     moving = true
 } else {
@@ -73,6 +76,7 @@ maxSpeed = movementSpdModifier * delta_time / 1000000
 
 image_blend = -1;
 
+// Stun
 if (StnDur &lt;= 0) {
     if (moving) {
         speed = clamp(speed + accelAmt, 0, maxSpeed)
@@ -84,10 +88,40 @@ if (StnDur &lt;= 0) {
     StnDur -= (delta_time/1000000);
     
     image_blend = c_yellow;
+    attackQueued = false;
 }
 
+// Death
 if (HP &lt;= 0) {
+    attackQueued = false;
     instance_destroy();
+}
+
+// Attacking
+if (attackQueued) {
+    image_blend = c_red;
+    movingToTarget = true;
+}
+
+if (movingToTarget) {
+    direction = point_direction(x, y, oPlayer.x, oPlayer.y);
+    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
+    
+    if (place_meeting(x, y, oPlayer)) {
+        movingToTarget = false;
+        attackCooldown = true;
+        attackQueued = false;
+        atkCooldownDur = 5;
+        dmgChar(oPlayer, 100);
+        stnChar(oPlayer, 0.5);
+    }
+}
+
+if (atkCooldownDur &gt; 0) {
+    atkCooldownDur -= (delta_time/1000000);  
+    attackQueued = false;
+} else if (atkCooldownDur &lt;= 0) {
+    attackCooldown = false;
 }
 
 // Collision test

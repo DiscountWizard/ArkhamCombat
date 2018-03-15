@@ -36,6 +36,7 @@ movingToTarget = false;
 deadzone = 0.3;
 turnSpd = 2;
 
+HP = 10000;
 </string>
           </argument>
         </arguments>

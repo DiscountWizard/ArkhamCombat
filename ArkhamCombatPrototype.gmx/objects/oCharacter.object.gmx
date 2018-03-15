@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>HP = 1;
 StnDur = 0;
+atkCooldownDur = 0;
 
 bumpSpd = 1;
 </string>
