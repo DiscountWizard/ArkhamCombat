@@ -30,6 +30,7 @@ StnDur = 0;
 atkCooldownDur = 0;
 
 bumpSpd = 1;
+state = 0;
 </string>
           </argument>
         </arguments>

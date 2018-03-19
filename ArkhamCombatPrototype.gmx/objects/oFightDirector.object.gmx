@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>attacker = -1;
+attackerBufferDur = 2;
+attackerBufferDur_Count = 0;
 </string>
           </argument>
         </arguments>
@@ -57,23 +59,35 @@ var index;
 var loops = 0;
 
 if (attacker &gt; 0) {
-    if (attacker.attackQueued == false) {
+    if (!instance_exists(attacker)) {
         attacker = -1;
+        attackerBufferDur_Count = attackerBufferDur;
+    }
+
+    if (attacker.state != attacker.state_AtkActive &amp;&amp; 
+        attacker.state != attacker.state_AtkQueued) {
+        attacker = -1;
+        attackerBufferDur_Count = attackerBufferDur;
     }
 }
 
-while (attacker &lt; 0 &amp;&amp; loops &lt; instance_number(oEnemy)) {
+var findNewAttacker = false;
+if (attacker &lt; 0 &amp;&amp; attackerBufferDur_Count &lt;= 0) {
+    findNewAttacker = true;
+}
+
+
+while (findNewAttacker &amp;&amp; loops &lt; instance_number(oEnemy)) {
     index = random(instance_number(oEnemy));
-    if (enemy[index].attackCooldown == false &amp;&amp; enemy[index].attackQueued == false) {
+    if (enemy[index].state == enemy[index].state_StandBy) {
         attacker = enemy[index];
-        enemy[index].attackQueued = true;
+        enemy[index].triggerAtk = true;
     }
     loops++;
 }
 
 
-
-
+if (attackerBufferDur_Count &gt; 0) { attackerBufferDur_Count -= (delta_time/1000000); }
 
 
 </string>

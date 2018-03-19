@@ -32,10 +32,30 @@ accelAmt = 1
 HP = 1000
 
 awareOfPlayer = false;
+
+followDistMin = 200;
+followDistMax = 150;
+
+// States
+state_AtkQueued = 1;
+state_AtkActive = 2;
+state_AtkCooldown = 3;
+state_StandBy = 4;
+state_Stn = 5;
+
+state = state_StandBy;
+
+state_Attack = false;
+state_Cooldown = false;
+
+triggerAtk = false;
 attackQueued = false;
 attackCooldown = false;
 
-movingToTarget = false;
+attacking = false;
+
+// Timers
+attackQueueDur = 1;
 </string>
           </argument>
         </arguments>
@@ -60,69 +80,109 @@ movingToTarget = false;
             <kind>1</kind>
             <string>event_inherited();
 
+/***************
+*** MOVEMENT ***
+****************/
 image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
+maxSpeed = movementSpdModifier * delta_time / 1000000
 
-if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; 200) {
+if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; followDistMax) {
     direction = image_angle
     moving = true
-} else if (point_distance(x, y, oPlayer.x, oPlayer.y) &lt; 150) {
+} else if (point_distance(x, y, oPlayer.x, oPlayer.y) &lt; followDistMin) {
     direction = image_angle - 180
     moving = true
 } else {
     moving = false
 }
 
-maxSpeed = movementSpdModifier * delta_time / 1000000
-
-image_blend = -1;
-
-// Stun
-if (StnDur &lt;= 0) {
-    if (moving) {
-        speed = clamp(speed + accelAmt, 0, maxSpeed)
-    } else {
-        speed = clamp(speed - accelAmt, 0, maxSpeed)
-    }
+if (moving) {
+    speed = clamp(speed + accelAmt, 0, maxSpeed)
 } else {
-    speed = 0;
-    StnDur -= (delta_time/1000000);
-    
-    image_blend = c_yellow;
-    attackQueued = false;
+    speed = clamp(speed - accelAmt, 0, maxSpeed)
 }
 
-// Death
+/*************
+*** STATES ***
+**************/
+switch (state) {
+case state_AtkQueued:
+
+    followDistMin = 150;
+    followDistMax = 100;
+    image_blend = c_green;
+    if (attackQueueDur &lt;= 0) {
+        state = state_AtkActive;
+    }
+    break;
+    
+case state_AtkActive:
+
+    image_blend = c_red;
+    direction = point_direction(x, y, oPlayer.x, oPlayer.y);
+    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
+    moving = true;
+    
+    if (place_meeting(x, y, oPlayer)) {
+        state = state_AtkCooldown;
+        atkCooldownDur = 3;
+        dmgChar(oPlayer, 100);
+    }
+    
+    break;
+    
+case state_AtkCooldown:
+
+    followDistMin = 200;
+    followDistMax = 150;
+    image_blend = -1;
+    
+    if (atkCooldownDur &lt;= 0) {
+        state = state_StandBy;
+    }
+    
+    break;
+    
+case state_StandBy:
+
+    followDistMin = 200;
+    followDistMax = 150;
+    image_blend = -1;
+    if (triggerAtk) {
+        attackQueueDur = 2;
+        triggerAtk = false;
+        state = state_AtkQueued;
+    }
+    
+    break;
+    
+case state_Stn:
+
+    image_blend = c_yellow;
+    speed = 0;
+    if (StnDur &lt;= 0) {
+        state = state_StandBy;
+    }
+    break;
+    
+default:
+    break;
+}
+
+/*************
+*** TIMERS ***
+**************/
+if (atkCooldownDur &gt; 0) { atkCooldownDur -= (delta_time/1000000); }
+if (attackQueueDur &gt; 0) { attackQueueDur -= (delta_time/1000000); }
+if (StnDur &gt; 0)         { StnDur -= (delta_time/1000000); }
+
+/************
+*** DEATH ***
+*************/
 if (HP &lt;= 0) {
-    attackQueued = false;
     instance_destroy();
 }
 
-// Attacking
-if (attackQueued) {
-    image_blend = c_red;
-    movingToTarget = true;
-}
-
-if (movingToTarget) {
-    direction = point_direction(x, y, oPlayer.x, oPlayer.y);
-    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
-    
-    if (place_meeting(x, y, oPlayer)) {
-        movingToTarget = false;
-        attackCooldown = true;
-        attackQueued = false;
-        atkCooldownDur = 5;
-        dmgChar(oPlayer, 100);
-        stnChar(oPlayer, 0.5);
-    }
-}
-
-if (atkCooldownDur &gt; 0) {
-    atkCooldownDur -= (delta_time/1000000);  
-    attackQueued = false;
-} else if (atkCooldownDur &lt;= 0) {
-    attackCooldown = false;
-}
 
 // Collision test
 if (place_meeting(x, y, oCharacter)) {
@@ -169,7 +229,7 @@ y = tempY
 
 //draw_line(x, y, nearest.x, nearest.y)
 draw_text(x, y + 20, string(distance_to_object(oPlayer)));
-draw_text(x, y - 20, string(StnDur));
+draw_text(x, y - 20, string(state));
 </string>
           </argument>
         </arguments>
