@@ -36,7 +36,9 @@ movingToTarget = false;
 deadzone = 0.3;
 turnSpd = 2;
 
-HP = 10000;
+HP = 1000;
+maxHP = 2000;
+
 </string>
           </argument>
         </arguments>
@@ -202,6 +204,10 @@ draw_set_alpha(1)
 if (instance_exists(closestEnemy)) {
     draw_line_width(x, y, closestEnemy.x, closestEnemy.y, 5);
 }
+
+// Health Bar
+drawHealthBar(25, 10, 50, HP, maxHP);
+
 </string>
           </argument>
         </arguments>

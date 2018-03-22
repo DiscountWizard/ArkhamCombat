@@ -30,6 +30,7 @@ movementSpdModifier = 250
 accelAmt = 1
 
 HP = 1000
+maxHP = 1000;
 
 awareOfPlayer = false;
 
@@ -230,6 +231,9 @@ y = tempY
 //draw_line(x, y, nearest.x, nearest.y)
 draw_text(x, y + 20, string(distance_to_object(oPlayer)));
 draw_text(x, y - 20, string(state));
+
+// Health Bar
+drawHealthBar(25, 10, 50, HP, maxHP);
 </string>
           </argument>
         </arguments>

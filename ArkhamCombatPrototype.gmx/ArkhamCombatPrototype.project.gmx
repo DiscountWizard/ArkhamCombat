@@ -36,6 +36,7 @@
     <script>scripts\getAryOfInstancesInTriangle.gml</script>
     <script>scripts\dmgChar.gml</script>
     <script>scripts\stnChar.gml</script>
+    <script>scripts\drawHealthBar.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fDebug</font>
