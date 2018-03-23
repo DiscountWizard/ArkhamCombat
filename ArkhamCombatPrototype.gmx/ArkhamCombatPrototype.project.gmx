@@ -48,6 +48,7 @@
     <object>objects\oEnemy</object>
     <object>objects\oCharacter</object>
     <object>objects\oFightDirector</object>
+    <object>objects\oGame</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rBasicArea</room>

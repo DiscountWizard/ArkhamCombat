@@ -85,7 +85,7 @@ attackQueueDur = 1;
 *** MOVEMENT ***
 ****************/
 image_angle = point_direction(x, y, oPlayer.x, oPlayer.y)
-maxSpeed = movementSpdModifier * delta_time / 1000000
+maxSpeed = movementSpdModifier * global.fts;
 
 if (point_distance(x, y, oPlayer.x, oPlayer.y) &gt; followDistMax) {
     direction = image_angle
@@ -121,7 +121,7 @@ case state_AtkActive:
 
     image_blend = c_red;
     direction = point_direction(x, y, oPlayer.x, oPlayer.y);
-    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
+    speed = 2.5 * movementSpdModifier * global.fts;
     moving = true;
     
     if (place_meeting(x, y, oPlayer)) {
@@ -173,9 +173,9 @@ default:
 /*************
 *** TIMERS ***
 **************/
-if (atkCooldownDur &gt; 0) { atkCooldownDur -= (delta_time/1000000); }
-if (attackQueueDur &gt; 0) { attackQueueDur -= (delta_time/1000000); }
-if (StnDur &gt; 0)         { StnDur -= (delta_time/1000000); }
+if (atkCooldownDur &gt; 0) { atkCooldownDur -= global.fts; }
+if (attackQueueDur &gt; 0) { attackQueueDur -= global.fts; }
+if (StnDur &gt; 0)         { StnDur -= global.fts; }
 
 /************
 *** DEATH ***

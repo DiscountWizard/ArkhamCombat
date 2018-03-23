@@ -87,14 +87,14 @@ if (normalizedSpdVector &lt; deadzone) {
 }
 normalizedSpdVector = ((normalizedSpdVector - deadzone) / (1 - deadzone))
 normalizedSpdVector = clamp(normalizedSpdVector, 0, 1.00);
-var maxInputSpd = normalizedSpdVector * movementSpdModifier * delta_time / 1000000;
+var maxInputSpd = normalizedSpdVector * movementSpdModifier * global.fts;
 
 if (maxInputSpd &gt; 0) {
-    speed += accelAmt * (delta_time / 1000000);
+    speed += accelAmt * global.fts;
     speed = clamp(speed, 0, maxInputSpd);
     //speed = maxInputSpd;
 } else if (speed &gt; maxInputSpd) {
-    speed -= decelAmt * (delta_time / 1000000);
+    speed -= decelAmt * global.fts;
     speed = clamp(speed, 0, maxInputSpd);
 }
 
@@ -160,7 +160,7 @@ if (global.Action3_Tap &amp;&amp; closestEnemy &gt; 0) {
 
 if (movingToTarget) {
     direction = point_direction(x, y, lockedEnemy.x, lockedEnemy.y);
-    speed = 2.5 * movementSpdModifier * delta_time / 1000000;
+    speed = 2.5 * movementSpdModifier * global.fts;
     
     if (place_meeting(x, y, lockedEnemy)) {
         movingToTarget = false;
