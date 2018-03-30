@@ -232,34 +232,7 @@ if (global.Action5_Active) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-// B (Red) Button
-var xOffset_red = sprite_width * 0.18;
-var yOffset_red = sprite_height * 0.295;
-
-draw_circle_colour(x - xOffset_red, y + yOffset_red, scaleConst * image_xscale, c_red, c_red, true);
-
-// A (Green) Button
-var xOffset_green = sprite_width * 0.247;
-var yOffset_green = sprite_height * 0.4;
-
-draw_circle_colour(x - xOffset_green, y + yOffset_green, scaleConst * image_xscale, c_green, c_green, true);
-
-// X (Blue) Button
-var xOffset_green = sprite_width * 0.315;
-var yOffset_green = sprite_height * 0.295;
-
-draw_circle_colour(x - xOffset_green, y + yOffset_green, scaleConst * image_xscale, c_blue, c_blue, true);
-
-// Y (Yellow) Button
-var xOffset_green = sprite_width * 0.247;
-var yOffset_green = sprite_height * 0.2;
-
-draw_circle_colour(x - xOffset_green, y + yOffset_green, scaleConst * image_xscale, c_yellow, c_yellow, true);
-
-*/
-
-// Left Analog Stick
+            <string>// Left Analog Stick
 var stickScale = 40;
 
 var xOffset_LeftStick = sprite_width * 0.756;
@@ -274,6 +247,8 @@ var stickYPos = y + yOffset_LeftStick + yStickMove;
 
 draw_circle_colour(stickXPos, stickYPos, stickScale * image_xscale, c_black, c_black, false);
 
+
+// 
 </string>
           </argument>
         </arguments>

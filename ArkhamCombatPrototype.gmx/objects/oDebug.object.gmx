@@ -55,6 +55,8 @@ toggleDebugMenu = false;
             <string>if (global.Action5_Pressed == true) {
     toggleDebugMenu = !toggleDebugMenu;
 }
+
+
 </string>
           </argument>
         </arguments>
